@@ -29,9 +29,10 @@ Template.body.onRendered ->
     document.querySelector('p.triggered-count').textContent = "#{tc} Times Triggered"
 
   shot$ = ->
-    Rx.Observable.fromEvent(button, 'click')
-    .scan (status, e)->
-      triggerCount$.next('triggered')
+    shotEvent$ = Rx.Observable.fromEvent(button, 'click')
+    shotEvent$.subscribe ->
+      triggerCount$.next('triggered')    
+    shotEvent$.scan (status, e)->
       _.extend status,
         count: status.count + 1
         e: e.currentTarget
