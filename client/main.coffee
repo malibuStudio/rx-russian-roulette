@@ -29,6 +29,7 @@ Template.body.onRendered ->
         count: status.count + 1
         e: e.currentTarget
         bullet: status.bullet
+        triggered: status.triggered + 1
     ,
       count: 0
       bullet: Math.floor(Math.random() * (6 - 1 + 1)) + 1
