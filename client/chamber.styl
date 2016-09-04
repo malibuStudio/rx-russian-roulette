@@ -1,0 +1,105 @@
+
+// Chamber Variables
+chamberColor  =  #36353a
+singleChamberSize = 33%
+// Chamber
+#chamber
+  position: relative
+  width: 50%
+  overflow: hidden
+  margin: 2rem auto
+  &:before
+    display: block
+    padding-top: 100%
+    content: ''
+
+// Center Ring
+#chamber .chamber__ring--center
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate3d(-50%, -50%, 0)
+  width: 25%
+  height: 25%
+  background: #242424
+  box-shadow: 0 0 0 4px #444
+  border-radius: 50%
+// Bullet Chambers Wrapper
+#chamber .chamber__chambers
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background: chamberColor
+  border-radius: 50%
+// Single Buller Chamber
+#chamber .chamber__bullet
+  position: absolute
+  width: singleChamberSize
+  height: singleChamberSize
+  border-radius: 50%
+  &:after
+    position: absolute
+    top: 15%
+    left: 15%
+    width: 70%
+    height: 70%
+    background: alpha(white, 0.5)
+    border-radius: 50%
+    content: ''
+  &[chamber="1"]
+    top: 0
+    left: 50%
+    transform: translate3d(-50%, 0, 0)
+  &[chamber="2"]
+    top: 33.5%
+    right: 4%
+    transform: translate3d(0%, -50%, 0)
+  &[chamber="3"]
+    bottom: 33.5%
+    right: 4%
+    transform: translate3d(0%, 50%, 0)
+  &[chamber="4"]
+    bottom: 0
+    left: 50%
+    transform: translate3d(-50%, 0, 0)
+  &[chamber="5"]
+    bottom: 33.5%
+    left: 4%
+    transform: translate3d(0%, 50%, 0)
+  &[chamber="6"]
+    top: 33.5%
+    left: 4%
+    transform: translate3d(0%, -50%, 0)
+// Outer Grooves
+#chamber .chamber--groove
+  position: absolute
+  width: 27%
+  height: 27%
+  border-radius: 50%
+  background: white
+  &.one
+    top: 0
+    right: 0
+    transform: translate3d(-16.66%, -33.3%, 0)
+  &.two
+    top: 50%
+    right: 0
+    transform: translate3d(76.66%, -50%, 0)
+  &.three
+    bottom: 0
+    right: 0
+    transform: translate3d(-16.66%, 33.3%, 0)
+  &.four
+    bottom: 0
+    left: 0
+    transform: translate3d(16.66%, 33.3%, 0)
+  &.five
+    top: 50%
+    left: 0
+    transform: translate3d(-76.66%, -50%, 0)
+  &.six
+    top: 0
+    left: 0
+    transform: translate3d(16.66%, -33.3%, 0)

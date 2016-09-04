@@ -25,3 +25,4 @@ insecure@1.0.7                # Allow all DB writes from clients (for prototypin
 coffeescript
 spectrum:jade                   # Jade wrapper for Meteor /w unicode
 mquandalle:stylus               # Stylus wrapper for Meteor
+infinitedg:gsap

@@ -2,9 +2,28 @@ head
   script(type="text/javascript" src="https://unpkg.com/@reactivex/rxjs/dist/global/Rx.umd.js")
 
 body
-  h1 RX Russian Roulette
-  p.triggered-count 0 Times Triggered
-  p.dead-count 0 Russians Dead
-  button Fire 1
-  
-  
+  #wrapper
+    h1 RX Russian Roulette
+    p.triggered-count 0 Times Triggered
+    p.dead-count 0 Russians Dead
+    #chamber
+      // Chambers
+      .chamber__chambers
+        .chamber__bullet(chamber="1")
+        .chamber__bullet(chamber="2")
+        .chamber__bullet(chamber="3")
+        .chamber__bullet(chamber="4")
+        .chamber__bullet(chamber="5")
+        .chamber__bullet(chamber="6")
+      .chamber__grooves
+        .chamber--groove.one
+        .chamber--groove.two
+        .chamber--groove.three
+        .chamber--groove.four
+        .chamber--groove.five
+        .chamber--groove.six
+      .chamber__ring--center
+      
+    button Fire 1
+    
+    
