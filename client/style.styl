@@ -1,11 +1,27 @@
 // ============================================================
-body
+// Border Box
+html
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  box-sizing: border-box
+*, *:before, *:after
+  -webkit-box-sizing: inherit
+  -moz-box-sizing: inherit
+  box-sizing: inherit
+
+
+html, body
   background: #F4F4F4
+  padding: 0
+  margin: 0
+  width: 100%
+  min-height: 100%
 
 #wrapper
-  width: 300px
+  width: 100%
+  max-width: 350px
   padding: 1rem
-  margin: 0 auto
+  margin: 1rem auto
   background: white
 
 button
