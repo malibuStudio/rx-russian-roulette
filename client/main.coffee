@@ -28,15 +28,16 @@ Template.body.onRendered ->
   .subscribe (tc)->
     document.querySelector('p.triggered-count').textContent = "#{tc} Times Triggered"
 
+
+  shotEvent$ = Rx.Observable.fromEvent(button, 'click')
+  shotEvent$.subscribe (e)->
+    $thisButton = $(e.currentTarget)
+    $thisButton.addClass 'pressed'
+    $thisButton.one 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', ->
+      $thisButton.removeClass 'pressed'
+  shotEvent$.subscribe ->
+    triggerCount$.next('triggered')
   shot$ = ->
-    shotEvent$ = Rx.Observable.fromEvent(button, 'click')
-    shotEvent$.subscribe (e)->
-      $thisButton = $(e.currentTarget)
-      $thisButton.addClass 'pressed'
-      $thisButton.one 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', ->
-        $thisButton.removeClass 'pressed'
-    shotEvent$.subscribe ->
-      triggerCount$.next('triggered')
     shotEvent$.scan (status, e)->
       _.extend status,
         count: status.count + 1
