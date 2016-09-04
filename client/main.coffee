@@ -25,10 +25,12 @@ Template.body.onRendered ->
         count: status.count + 1
         e: e.currentTarget
         bullet: status.bullet
+        triggered: status.triggered + 1
     ,
       count: 0
       bullet: Math.floor(Math.random() * (6 - 1 + 1)) + 1
       dead: 0
+      triggered: 0
     .subscribe (o)->
       unless o.count is o.bullet
         console.log "Fired Bullet : #{o.count}"
@@ -37,5 +39,6 @@ Template.body.onRendered ->
         console.log "!!!!! BANG !!!!!"
         shootGunSound()
         o.dead = o.dead + 1
-        document.querySelector('p').textContent = "#{o.dead} Russians Dead"
+        document.querySelector('p.dead-count').textContent = "#{o.dead} Russians Dead"
         reloadRevolver(o)
+      document.querySelector('p.triggered-count').textContent = "#{o.triggered} Times Triggered"
