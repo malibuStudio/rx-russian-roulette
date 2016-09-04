@@ -15,21 +15,27 @@ Template.body.onRendered ->
 
   # 죽은 러시안 스트림
   deadRussian$ = new Rx.Subject
-  deadRussian$.map ->1
+  deadRussian$.map -> 1
   .scan (o)-> o+1
   .subscribe (o)->
     button.textContent = "Reload and Fire 1"
+    document.querySelector('p.dead-count').textContent = "#{o} Russians Dead"
 
-    document.querySelector('p').textContent = "#{o} Russians Dead"
+  # 방아쇠를 당긴 횟수 스트림
+  triggerCount$ = new Rx.Subject
+  triggerCount$.map -> 1
+  .scan (tc)-> tc+1
+  .subscribe (tc)->
+    document.querySelector('p.triggered-count').textContent = "#{tc} Times Triggered"
 
   shot$ = ->
     Rx.Observable.fromEvent(button, 'click')
     .scan (status, e)->
+      triggerCount$.next('triggered')
       _.extend status,
         count: status.count + 1
         e: e.currentTarget
         bullet: status.bullet
-        triggered: status.triggered + 1
     ,
       count: 0
       bullet: Math.floor(Math.random() * (6 - 1 + 1)) + 1
