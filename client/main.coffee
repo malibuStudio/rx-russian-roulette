@@ -6,9 +6,11 @@ Template.body.onRendered ->
   shootGunSound = ->
     gunSound = new Audio '/gun.mp3'
     shellSound = new Audio '/shell.mp3'
+    rollSound = new Audio '/roll.mp3'
     gunSound.play()
     setTimeout ->
       shellSound.play()
+      rollSound.play()
     , 400
 
   button = document.querySelector('button')
@@ -39,11 +41,11 @@ Template.body.onRendered ->
     triggerCount$.next('triggered')
   shot$ = ->
     shotEvent$.scan (status, e)->
-      _.extend status,
+      Object.assign status,
         count: status.count + 1
         e: e.currentTarget
         bullet: status.bullet
-        rotation: status.rotation + 16.7
+        rotation: status.rotation + 60
     ,
       count: 0
       bullet: Math.floor(Math.random() * (6 - 1 + 1)) + 1
@@ -59,14 +61,18 @@ Template.body.onRendered ->
         o.e.textContent = "Fire #{o.count + 1}"
         dryFire = new Audio '/dry.mp3'
         dryFire.play()
-        TweenMax.to '#chamber', 0.25,
+        TweenMax.to '#chamber', 0.1,
           rotation: o.rotation
       complete: ->
         # 총알이 나갔을 때
         ## Bang 하고
         console.log "!!!!! BANG !!!!!"
-        TweenMax.to '#chamber', 0.25,
-          rotation: 0
+        TweenMax.to '#chamber', 1.2,
+          rotation: 1800
+          ease: Power4.easeOut
+          onComplete: ->
+            TweenMax.to '#chamber', 0,
+              rotation: 0
         shootGunSound()
         ## 러시안이 죽는다.
         deadRussian$.next('die')
