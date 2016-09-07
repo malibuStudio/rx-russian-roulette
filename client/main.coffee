@@ -3,14 +3,18 @@ Template.body.onRendered ->
   console.log ">>>> WELCOME TO RX RUSSION ROULETTE <<<<"
   console.log ">>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<"
 
+  gunSound = new Audio '/gun.mp3'
+  shellSound = new Audio '/shell.mp3'
+  rollSound = new Audio '/roll.mp3'
+  dryFire = new Audio '/dry.mp3'
+  Audio::playFromStart = ->
+    @currentTime = 0
+    @play()
   shootGunSound = ->
-    gunSound = new Audio '/gun.mp3'
-    shellSound = new Audio '/shell.mp3'
-    rollSound = new Audio '/roll.mp3'
-    gunSound.play()
+    gunSound.playFromStart()
     setTimeout ->
-      shellSound.play()
-      rollSound.play()
+      shellSound.playFromStart()
+      rollSound.playFromStart()
     , 400
 
   button = document.querySelector('button')
@@ -59,8 +63,7 @@ Template.body.onRendered ->
       next: (o)->
         console.log "Fired Bullet : #{o.count}"
         o.e.textContent = "Fire #{o.count + 1}"
-        dryFire = new Audio '/dry.mp3'
-        dryFire.play()
+        dryFire.playFromStart()
         TweenMax.to '#chamber', 0.1,
           rotation: o.rotation
       complete: ->
